@@ -17,7 +17,6 @@ from apps.api.serializers import UserSerializer
 
 class UserData(APIView):
     def get(self, request, format=None):
-        print("hello")
         user = User.objects.all()
         serializer = UserSerializer(user, many=True)
         return Response(serializer.data)
