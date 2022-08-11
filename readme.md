@@ -9,6 +9,6 @@
 > In the terminal, type `python manage.py createsuperuser`, then enter the credetials and then you are done.
 
 ## Info
--[ ] Detailed implementaion of Courses and Enrolling function
--[ ] Creating different roles based on the type of business
--[ ] Implementing payment gateway
+- [ ] Detailed implementaion of Courses and Enrolling function
+- [ ] Creating different roles based on the type of business
+- [ ] Implementing payment gateway
