@@ -11,4 +11,13 @@
 ## Info
 - [ ] Detailed implementaion of Courses and Enrolling function
 - [ ] Creating different roles based on the type of business
+- [ ] Creating Social Authentication System
 - [ ] Implementing payment gateway
+
+
+### Packages Used:-
+> djangorestframework
+> psycopg-binary
+> django-oauth-toolkit
+> google-api-python-client
+> Razorpay Python SDK
