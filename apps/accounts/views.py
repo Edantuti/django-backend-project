@@ -11,16 +11,18 @@ from rest_framework.decorators import api_view, permission_classes
 
 from oauth2_provider.contrib.rest_framework import TokenHasReadWriteScope, TokenHasScope
 
-from apps.api.serializers import UserSerializer
+from ..api.serializers import UserSerializer
 
 # Create your views here.
 
 class UserData(APIView):
     def get(self, request, format=None):
+        # permission_classes=['permission.isAuthenticated, TokenHasScope']
         user = User.objects.all()
         serializer = UserSerializer(user, many=True)
         return Response(serializer.data)
     def post(self, request, format=None):
+        #permission_classes=['permission.isAuthenticated, TokenHasReadWriteScope']
         data = request.POST
         User.objects.create_user(username=data.get("username", 0),password=data.get("password", 0))
         return Response("Done!\n")
@@ -33,5 +35,6 @@ class UserDetail(APIView):
             return Http404
             
     def get(self, request,pk, format=None):
+        # permission_classes=['permission.isAuthenticated, TokenHasScope']
         serializer = UserSerializer(self.get_object(pk))
         return Response(serializer.data)

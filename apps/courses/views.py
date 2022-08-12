@@ -8,9 +8,8 @@ from rest_framework.response import Response
 
 from ..freelanceshala.models import Order
 
-
 from .models import Course, Enroll
-from apps.api.serializers import CourseSerializer, EnrollSerializer
+from ..api.serializers import CourseSerializer, EnrollSerializer
 # Create your views here.
 
 
@@ -22,14 +21,7 @@ class CourseData(APIView):
     
     def post(self, request, format=None):
         data = request.POST
-        if data.get("username") != None:
-            try:
-                user = User.objects.get(username__icontains=data.get("username"))
-            except User.DoesNotExist:
-                return Http404
-        else:
-            raise TypeError('Username must be included')
-        Course.objects.create_course(name=data.get("name", 0), description=data.get("description"),user_id=user,money=data.get("money"))
+        Course.objects.create_course(name=data.get("name"), description=data.get("description"),user_id=request.user,money=data.get("money"))
         return Response(request.data)
         
     
@@ -65,14 +57,10 @@ class EnrollData(APIView):
     def post(self, request, format=None):
         data=request.POST
         try:
-            user=User.objects.get(username__icontains=data.get("username"))
-        except User.DoesNotExist:
-            return Http404
-        try:
             course=Course.objects.get(name__exact=data.get("course_name"))
         except Course.DoesNotExist:
             return Http404
-        enroll = Enroll.objects.create_enroll(user, course)
+        enroll = Enroll.objects.create_enroll(request.user, course)
         print(enroll)
         Order.objects.create(enroll=enroll)
         return Response(request.data)

@@ -1,7 +1,7 @@
 from datetime import datetime
 from django.db import models
 
-from apps.courses.models import Enroll
+from ..courses.models import Enroll
 # Create your models here.
 
 class Order(models.Model):

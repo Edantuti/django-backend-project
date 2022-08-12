@@ -1,7 +1,7 @@
 from rest_framework import serializers
 # from apps.accounts.models import User, UserManager
 from django.contrib.auth.models import User
-from apps.courses.models import Course, Enroll
+from ..courses.models import Course, Enroll
 from ..freelanceshala.models import Order
 
 class UserSerializer(serializers.ModelSerializer):
