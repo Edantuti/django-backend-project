@@ -9,6 +9,7 @@ class Order(models.Model):
     created_at = models.DateTimeField(default=datetime.now)
     
     
+    
 
 # class FreelanceOrder(Order):
 #     pass

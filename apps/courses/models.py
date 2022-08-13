@@ -1,13 +1,9 @@
-from datetime import datetime, timezone
-
 from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
-
-
 from django.contrib.auth.models import User
 
 # Create your models here.
-
+from datetime import datetime
 
 class CourseManager(models.Manager):
     use_in_migrations=True
@@ -29,7 +25,13 @@ class EnrollManager(models.Manager):
         enroll.save(self.db)
         return enroll
     
-        
+class VideoManager(models.Manager):
+    use_in_migrations=True
+    
+    def create_video_db(self,name ,video, course):
+        video = self.model(name=name, course=course, video=video)
+        video.save(self.db)
+        return video
 
 class Course(models.Model):
     name = models.CharField(max_length=200, unique=True, blank=False)
@@ -37,7 +39,7 @@ class Course(models.Model):
     creator = models.ForeignKey(User, on_delete=models.CASCADE)
     money = models.FloatField()
     rating = models.IntegerField(validators=[MaxValueValidator(5), MinValueValidator(0)], default=0)
-    created_at = models.DateTimeField(default=datetime.now)
+    created_at = models.DateTimeField(default=datetime.now())
     
     
     def __str__(self):
@@ -50,5 +52,25 @@ class Enroll(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
     
+    class Meta:
+        verbose_name= "enroll"
+        
+    def __str__(self):
+        return self.user.name + self.course.name
+    
     objects=EnrollManager()
+    
+class Video(models.Model):
+    name=models.CharField(max_length=200)
+    course=models.ForeignKey(Course, on_delete=models.CASCADE)
+    video=models.FileField(upload_to="videos")
+    created_at = models.DateTimeField(default=datetime.now())
+    
+    def __str__(self):
+        return self.name
+    
+    class Meta:
+        verbose_name="video"
+    
+    objects=VideoManager()
     
