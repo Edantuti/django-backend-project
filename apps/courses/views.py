@@ -1,7 +1,5 @@
 from django.shortcuts import render
 from django.http import Http404
-from django.contrib.auth.models import User
-from django.core.files.uploadedfile import SimpleUploadedFile
 
 from rest_framework import status, permissions
 from rest_framework.views import APIView
@@ -9,7 +7,6 @@ from rest_framework.response import Response
 from rest_framework.parsers import MultiPartParser, FileUploadParser
 
 # from cv2 import VideoCapture, CAP_PROP_FRAME_COUNT, CAP_PROP_FPS
-from .forms import VideoForm
 from . import video
 from ..freelanceshala.models import Order
 from .models import Course, Enroll, Video
@@ -76,7 +73,7 @@ class VideoData(APIView):
         video = Video.objects.all()
         serializer = VideoSerializer(video, many=True)
         
-        return Response(request.data)
+        return Response(serializer.data)
     
     def post(self, request, format=None):
         data=request.POST
@@ -87,22 +84,21 @@ class VideoData(APIView):
         Video.objects.create_video_db(name=request.FILES["video"].name, video=request.FILES["video"], course=course)
         
         
-        return Response(request.data["course"])
+        return Response(status=status.HTTP_202_ACCEPTED)
     
     
 class VideoDetail(APIView):
     def get_object(self, pk):
         try:
-            return Video.objects.get(course=pk)
+            return Video.objects.filter(course_id=pk)
         except Video.DoesNotExist:
             raise TypeError("Video Doesn't exist")
-    def get(self, request, format=None):
+    def get(self, request, pk, format=None):
         try:
-            course=Course.objects.get(name_iexact=request.data.get("course"))
+            course=Course.objects.get(name__iexact=pk)
         except Course.DoesNotExist:
             raise TypeError("Course doesn't exist")
-        video = self.get_object(course.id)
-        serializer = VideoSerializer(video, many=True)
+        serializer = VideoSerializer(self.get_object(course.id), many=True)
         return Response(serializer.data)
         
         

@@ -1,8 +1,11 @@
 from rest_framework import serializers
 # from apps.accounts.models import User, UserManager
+# from django.conf import settings
 from django.contrib.auth.models import User
 from ..courses.models import Course, Enroll, Video
 from ..freelanceshala.models import Order
+
+# User = settings.AUTH_USER_MODEL
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
