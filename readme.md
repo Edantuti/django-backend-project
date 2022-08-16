@@ -21,3 +21,6 @@
 > django-oauth-toolkit <br>
 > google-api-python-client <br>
 > Razorpay Python SDK
+
+#### Note
+> project is put on halt, work will resume after 28th of august 2022
