@@ -32,8 +32,9 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'apps.accounts',
+    # 'apps.accounts.apps.AccountsConfig',
     'apps.api',
+    'apps.accounts',
     'apps.courses',
     'apps.freelanceshala',
     'django.contrib.admin',
@@ -44,7 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     
     'rest_framework',
-    'oauth2_provider',
+    
     
 ]
 
@@ -132,18 +133,10 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 #my settings
-# AUTH_USER_MODEL = "accounts.User"
+AUTH_USER_MODEL = 'accounts.User'
 
-OAUTH2_PROVIDER = {
-    # this is the list of available scopes
-    'SCOPES': {'read': 'Read scope', 'write': 'Write scope', 'groups': 'Access to your groups'}
-}
 
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'oauth2_provider.contrib.rest_framework.OAuth2Authentication',
-    ),
-
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticated',
     )

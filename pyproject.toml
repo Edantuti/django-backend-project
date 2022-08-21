@@ -8,8 +8,9 @@ authors = ["Edantuti <edantuti@gmail.com>"]
 python = "^3.8"
 djangorestframework = "^3.13.1"
 psycopg-binary = "^3.0.16"
-django-oauth-toolkit = "^2.1.0"
 google-api-python-client = "^2.55.0"
+wheel = "^0.37.1"
+django-allauth = "^0.51.0"
 
 [tool.poetry.dev-dependencies]
 
