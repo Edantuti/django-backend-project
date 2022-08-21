@@ -18,7 +18,7 @@
 ### Packages Used:-
 > djangorestframework <br>
 > psycopg-binary <br>
-> django-oauth-toolkit <br>
+> django-allauth <br>
 > google-api-python-client <br>
 > Razorpay Python SDK
 
