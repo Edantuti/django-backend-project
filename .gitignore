@@ -1,4 +1,4 @@
 /env/
 .vscode
 google_client.json
-*.mp4
+/media/videos/
