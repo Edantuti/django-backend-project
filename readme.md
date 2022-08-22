@@ -48,7 +48,7 @@ hosting - [aws](https://aws.amazon.com/) or google cloud
 
 This is the rough idea till today
 
-![[IMG20220815171035.jpg]]
+
 
 ## Run
 > open terminal and type `python3 -m venv env && source env/bin/activate && pip install poetry`. Then, type `poetry install` to install all the packages. Then type `python manage.py runserver <PORT>` (default is 8000)
