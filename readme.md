@@ -8,7 +8,7 @@
 > And for courses, we are planning to make it more accessible for the people, by including various methods.
 
 ##### My pov
-> Here, we will let the user decide in which language they would like to create course, we will have our people voice over 
+> Here, we will let the user decide in which language they would like to create course, we will have our people voice over
 that in various other language, saving time for the user who creates the course, and making it accessible.
 
 # What is a credit system?
@@ -16,7 +16,7 @@ that in various other language, saving time for the user who creates the course,
 
 > The way it will be evaluted is yet to be decided.
 
-# Authentication 
+# Authentication
 > Using django - allauth, which comes with various prebuilt packages for all the types of third party authentication, we can easily create new autheticated users.
 
 ## Things to implement
@@ -72,5 +72,4 @@ This is the rough idea till today
 > Razorpay Python SDK
 
 #### Note
-> project is put on halt, work will resume after 28th of august 2022
-
+> project is in progress! 
