@@ -144,7 +144,6 @@ REST_FRAMEWORK = {
 
 DATA_UPLOAD_MAX_MEMORY_SIZE=100000 #==100mb
 
-STATIC_URL = '/static/'
 STATIC_ROOT = path.join(BASE_DIR, 'static')
 MEDIA_URL='/media/'
 MEDIA_ROOT=path.join(BASE_DIR,'media')
