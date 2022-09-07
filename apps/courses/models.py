@@ -6,7 +6,7 @@ from django.contrib.auth import get_user_model
 User = get_user_model()
 
 # Create your models here.
-from datetime import datetime
+from django.utils import timezone
 
 class CourseManager(models.Manager):
     use_in_migrations=True
@@ -42,7 +42,7 @@ class Course(models.Model):
     creator = models.ForeignKey(User, on_delete=models.CASCADE)
     money = models.FloatField()
     rating = models.IntegerField(validators=[MaxValueValidator(5), MinValueValidator(0)], default=0)
-    created_at = models.DateTimeField(default=datetime.now)
+    created_at = models.DateTimeField(default=timezone.now())
     
     
     def __str__(self):
@@ -67,7 +67,7 @@ class Video(models.Model):
     name=models.CharField(max_length=200)
     course=models.ForeignKey(Course, on_delete=models.CASCADE)
     video=models.FileField(upload_to="videos")
-    created_at = models.DateTimeField(default=datetime.now)
+    created_at = models.DateTimeField(default=timezone.now())
     
     def __str__(self):
         return self.name
