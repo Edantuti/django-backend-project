@@ -12,7 +12,7 @@ class CourseManager(models.Manager):
     use_in_migrations=True
     def create_course(self, name, description,user, money):
         if name is None:
-            raise TypeError('COurse should have a name')
+            raise TypeError('Course should have a name')
         if description is None:
             raise TypeError('Course must have a description')
         if money is None:
@@ -35,6 +35,9 @@ class VideoManager(models.Manager):
         video = self.model(name=name, course=course, video=video)
         video.save(self.db)
         return video
+    
+    def create_directory(instance, filename):
+        return f'videos/{instance.course}/{filename}'
 
 class Course(models.Model):
     name = models.CharField(max_length=200, unique=True, blank=False)
@@ -63,10 +66,11 @@ class Enroll(models.Model):
     
     objects=EnrollManager()
     
+
 class Video(models.Model):
     name=models.CharField(max_length=200)
     course=models.ForeignKey(Course, on_delete=models.CASCADE)
-    video=models.FileField(upload_to="videos")
+    video=models.FileField(upload_to=VideoManager.create_directory)
     created_at = models.DateTimeField(default=timezone.now())
     
     def __str__(self):
@@ -78,3 +82,21 @@ class Video(models.Model):
     objects=VideoManager()
 
 
+class Lesson(models.Model):
+    info=models.TextField(editable=True, max_length=300)
+    course=models.ForeignKey(to=Course,on_delete=models.CASCADE)
+    
+    
+    
+class Question(models.Model):
+    lesson=models.ForeignKey(to=Lesson,on_delete=models.CASCADE)
+    question_text=models.CharField(max_length=200)
+    
+    
+class Choice(models.Model):
+    question=models.ForeignKey(to=Question,on_delete=models.CASCADE)
+    choice_text=models.CharField(max_length=100)
+    correct=models.BooleanField(default=False, editable=True)
+    
+    
+    

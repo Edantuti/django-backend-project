@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-s45rsys&ka9h%dgqbvr5sw^uwpx_c*pzjy&!a77u*&z^ilk3m^
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
 
 
 # Application definition
@@ -137,9 +137,9 @@ AUTH_USER_MODEL = 'accounts.User'
 
 
 REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAuthenticated',
-    )
+    # 'DEFAULT_PERMISSION_CLASSES': (
+    #     'rest_framework.permissions.IsAuthenticated',
+    # )
 }
 
 DATA_UPLOAD_MAX_MEMORY_SIZE=100000 #==100mb
@@ -147,7 +147,3 @@ DATA_UPLOAD_MAX_MEMORY_SIZE=100000 #==100mb
 STATIC_ROOT = path.join(BASE_DIR, 'static')
 MEDIA_URL='/media/'
 MEDIA_ROOT=path.join(BASE_DIR,'media')
-
-# USE_TZ=True
-
-# TIME_ZONE="Asia/Kolkata"

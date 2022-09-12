@@ -21,7 +21,14 @@ class UserData(APIView):
    def post(self, request, format=None):
        #permission_classes=['permission.isAuthenticated, TokenHasReadWriteScope']
        data = request.POST
-       User.objects.create_user(username=data.get("username", 0),password=data.get("password", 0))
+       staff = data.get("is_staff")
+       superuser = data.get("is_superuser")
+       if not staff and not superuser:
+           User.objects.create_user(username=data.get("username", 0),email=data.get("email", 0),password=data.get("password", 0))
+       if staff and not superuser:
+           User.objects.create_staffuser(username=data.get("username", 0),email=data.get("email", 0),password=data.get("password", 0))
+       if superuser:
+           User.objects.create_superuser(username=data.get("username", 0),email=data.get("email", 0),password=data.get("password", 0))
        return Response("Done!\n")
   
 class UserDetail(APIView):
